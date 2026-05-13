@@ -116,7 +116,7 @@ public partial class UILeaderboard : Control
 
 	private void AddPlayer(Player player)
 	{
-		if (player.IsLocal || _playerToItem.ContainsKey(player))
+		if (_playerToItem.ContainsKey(player))
 			return;
 
 		UILeaderboardUserItem card = Globals.CreateInstanceFromScene<UILeaderboardUserItem>(ItemPath);
