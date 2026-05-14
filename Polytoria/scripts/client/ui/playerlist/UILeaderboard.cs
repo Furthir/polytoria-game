@@ -222,7 +222,7 @@ public partial class UILeaderboard : Control
 
 		// Resize based on container, need to be resized on next frame
 		await ToSignal(RenderingServer.Singleton, RenderingServer.SignalName.FramePostDraw);
-		float ys = _layout.Size.Y + 16;
+		float ys = _layout.GetCombinedMinimumSize().Y + 16;
 
 		if (ys > LeaderboardMaxHeight)
 		{
