@@ -1067,7 +1067,6 @@ size_flags_horizontal = 3
 theme = ExtResource("16_1f7jh")
 theme_override_constants/icon_max_width = 16
 clip_tabs = false
-close_with_middle_mouse = false
 tab_close_display_policy = 2
 drag_to_rearrange_enabled = true
 
