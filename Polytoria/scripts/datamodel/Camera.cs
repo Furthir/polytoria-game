@@ -784,15 +784,6 @@ public sealed partial class Camera : Dynamic
 			}
 		}
 
-		if (@event is InputEventMouseMotion mouseEvent)
-		{
-			if (Root.Input.IsTouchscreen) return;
-			if (_turning && Root.Input.CursorLocked)
-			{
-				RotateCamera(mouseEvent.Relative);
-			}
-		}
-
 		// Toggle first person
 		if (@event.IsActionPressed("cam_toggle_firstperson"))
 		{
