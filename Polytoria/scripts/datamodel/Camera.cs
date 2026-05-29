@@ -634,14 +634,14 @@ public sealed partial class Camera : Dynamic
 	{
 		if (Mode != CameraModeEnum.Follow) return;
 		IsFirstPerson = false;
-		Root.Input.CursorLocked = false;
-		Root.Input.CursorVisible = true;
 		if (resetZoom)
 		{
 			_targetZoom = DefaultZoomDistance;
 		}
 		if (!CtrlLocked)
 		{
+			Root.Input.CursorVisible = true;
+			Root.Input.CursorLocked = false;
 			StopTurning();
 		}
 		FirstPersonExited?.Invoke();
@@ -687,7 +687,7 @@ public sealed partial class Camera : Dynamic
 
 		if (!Root.Input.CursorLocked)
 		{
-			Root.Input.CursorLocked = false;
+			Root.Input.CursorLocked = true;
 			Root.Input.OverrideMousePos = false;
 			return;
 		}
@@ -708,7 +708,6 @@ public sealed partial class Camera : Dynamic
 		if (!Root.Input.CursorLocked)
 		{
 			Root.Input.CursorVisible = true;
-			Root.Input.CursorLocked = false;
 			Root.Input.OverrideMousePos = false;
 			GDNode.GetViewport().WarpMouse(_turnStartPos);
 #if GODOT_WINDOWS
@@ -717,8 +716,8 @@ public sealed partial class Camera : Dynamic
 		}
 		else
 		{
-			Root.Input.CursorVisible = false;
-			Root.Input.CursorLocked = true;
+			Root.Input.CursorVisible = true;
+			Root.Input.CursorLocked = false;
 			Root.Input.OverrideMousePos = false;
 		}
 	}
