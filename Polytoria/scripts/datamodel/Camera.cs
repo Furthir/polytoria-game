@@ -719,7 +719,7 @@ public sealed partial class Camera : Dynamic
 		}
 		GDNode.GetViewport().WarpMouse(_turnStartPos);
 #if GODOT_WINDOWS
-			GDNode.GetViewport().WarpMouse(_turnStartPos); // Workaround for godotengine/godot#119205
+		GDNode.GetViewport().WarpMouse(_turnStartPos); // Workaround for godotengine/godot#119205
 #endif
 	}
 
