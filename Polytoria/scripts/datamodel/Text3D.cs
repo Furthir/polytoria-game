@@ -231,7 +231,7 @@ public sealed partial class Text3D : Dynamic
 		set
 		{
 			_useRichText = value;
-			
+
 			ApplyVisibleState();
 			RecomputeSize();
 			OnPropertyChanged();
@@ -251,7 +251,7 @@ public sealed partial class Text3D : Dynamic
 			OnPropertyChanged();
 		}
 	}
-	
+
 	[Editable, ScriptProperty, DefaultValue(false)]
 	public bool AlwaysOnTop
 	{
@@ -265,7 +265,7 @@ public sealed partial class Text3D : Dynamic
 			OnPropertyChanged();
 		}
 	}
-	
+
 	[Editable, ScriptProperty]
 	public bool FixedSize
 	{
@@ -273,7 +273,7 @@ public sealed partial class Text3D : Dynamic
 		set
 		{
 			_fixedSize = value;
-			
+
 			_label3D.FixedSize = value;
 			_sprite3D.FixedSize = value;
 			OnPropertyChanged();
@@ -287,7 +287,7 @@ public sealed partial class Text3D : Dynamic
 		set
 		{
 			_visible = value;
-			
+
 			ApplyVisibleState();
 			OnPropertyChanged();
 		}
@@ -308,11 +308,11 @@ public sealed partial class Text3D : Dynamic
 		}
 		RecomputeSize();
 	}
-	
+
 	private void ApplyVisibleState()
 	{
 		SetEnableRichTextViewport(_useRichText);
-		
+
 		if (_useRichText)
 		{
 			_sprite3D.Texture = _subViewport?.GetTexture();
