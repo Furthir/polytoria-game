@@ -55,7 +55,7 @@ public partial class GUI3D : Dynamic
 			UpdateSize();
 			SetProcess(value);
 			if (!value) { _area.Rotation = Vector3.Zero; }
-			
+
 			OnPropertyChanged();
 		}
 	}
@@ -162,6 +162,7 @@ public partial class GUI3D : Dynamic
 		TransformChanged += UpdateCanvasSize;
 
 		_area.MouseEntered += OnAreaMouseEnter;
+		_area.MouseExited += OnAreaMouseExit;
 
 		base.Init();
 	}
@@ -184,6 +185,7 @@ public partial class GUI3D : Dynamic
 	public override void PreDelete()
 	{
 		_area.MouseEntered -= OnAreaMouseEnter;
+		_area.MouseExited -= OnAreaMouseExit;
 		TransformChanged -= UpdateCanvasSize;
 		base.PreDelete();
 	}
@@ -220,7 +222,7 @@ public partial class GUI3D : Dynamic
 	private void HandleMouse(InputEventMouse @event)
 	{
 		Vector3? pre = FindMouse(@event.GlobalPosition);
-		if (pre == null) { _mouseInArea = false; return; }
+		if (pre == null) { _mouseInArea = false; _lastPos = null; return; }
 
 		Vector3 mousePos3D = pre.Value;
 		mousePos3D = _area.GlobalTransform.AffineInverse() * mousePos3D;
@@ -249,6 +251,11 @@ public partial class GUI3D : Dynamic
 	private void OnAreaMouseEnter()
 	{
 		_mouseInArea = true;
+	}
+
+	private void OnAreaMouseExit()
+	{
+		if (!_alwaysOnTop) { _mouseInArea = false; }
 	}
 
 	protected void RecomputeChildTransforms()
@@ -344,9 +351,7 @@ public partial class GUI3D : Dynamic
 			Camera3D cam = Globals.Singleton.GetViewport().GetCamera3D();
 			if (cam != null)
 			{
-				Vector3 look = cam.ToGlobal(new(0, 0, -100)) - cam.GlobalTransform.Origin;
-
-				_area.LookAt(look);
+				_area.LookAt(_area.GlobalPosition - cam.GlobalTransform.Basis.Z);
 				_area.RotateObjectLocal(Vector3.Back, cam.Rotation.Z);
 			}
 		}
